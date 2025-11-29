@@ -1,23 +1,51 @@
 import { renderCheckoutHeader } from "./Checkout/checkoutHeader.js";
 import { renderOrderSummary } from "./Checkout/orderSummary.js";
 import { renderPaymentSummary } from "./Checkout/paymentSummary.js";
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
+import { loadCart } from "../data/cart.js";
 // import '../data/cart-calss.js';
 import '../data/car.js';
 // import '../data/backend-practice.js';
 
-new Promise((resolve, reject) => {
-    loadProducts(() => {
-        resolve();
-    });
-}).then(() => {
+
+Promise.all([
+    loadProductsFetch(),    
+    new Promise((resolve) => {
+        loadCart(() => {
+            resolve();
+        });
+    })
+
+]).then(() => {
     renderCheckoutHeader();
     renderOrderSummary();
     renderPaymentSummary();
-})
+});
 
-// loadProducts(() => {
+// new Promise((resolve) => {
+//     loadProducts(() => {
+//         resolve('value1');
+//     });
+// }).then((value) => {
+//     console.log(value);
+    
+//     return new Promise((resolve) => {
+//         loadCart(() => {
+//             resolve();
+//         });
+//     });                  
+// }).then(() => {
 //     renderCheckoutHeader();
 //     renderOrderSummary();
 //     renderPaymentSummary();
+// });
+
+
+
+// loadProducts(() => {
+//     loadCart(() => {
+//         renderCheckoutHeader();
+//         renderOrderSummary();
+//         renderPaymentSummary();
+//     }); 
 // });
