@@ -9,15 +9,24 @@ import '../data/car.js';
 
 
 async function loadPage() {
+
+    try {
+        // throw 'error1 for example'
+
+       await loadProductsFetch();
+
+        const value = await new Promise((resolve, reject) => {
+            // throw 'error2 for example'
+            loadCart(() => {
+                // reject('error3 for example')
+                resolve();
+            });
+        }); 
+    } catch (error) {
+        console.log('Unexpecter error. Please try again later.');
+    }
     
-    await loadProductsFetch();
-
-    await new Promise((resolve) => {
-        loadCart(() => {
-            resolve();
-        });
-    });
-
+ 
     renderCheckoutHeader();
     renderOrderSummary();
     renderPaymentSummary();
