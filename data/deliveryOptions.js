@@ -34,7 +34,7 @@ export function validDeliveryOption(deliveryOptionId) {
 
   deliveryOptions.forEach((option) => {
     if (option.id === deliveryOptionId) {
-      found =true;
+      found = true;
     }
   });
   return found;
@@ -65,5 +65,20 @@ function skipWeekendDays(deliveryDays) {
     }
   }
   return deliveryDays
+}
+
+export function calculateDeliveryDateFrom(orderTime, deliveryOption) {
+  let orderDate = dayjs(orderTime);
+  let daysAdded = 0;
+
+  while(daysAdded < deliveryOption.deliveryDays) {
+    orderDate = orderDate.add(1, 'day');
+
+    if(orderDate.day() !== 0 && orderDate.day() !== 6) {
+      daysAdded++;
+    }
+  }
+
+  return orderDate.format('MMMM D');
 }
 

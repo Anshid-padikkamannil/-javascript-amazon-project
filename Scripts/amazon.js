@@ -72,8 +72,7 @@ function renderProductsGrid() {
 
       updateCartQuantity();
 
-    document.querySelectorAll('.js-add-to-cart')
-        .forEach((button) => {
+    document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
       let addedMessageTimeoutId;
 
