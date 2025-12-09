@@ -43,7 +43,7 @@ async function loadPage() {
         </div>
 
         <div class="product-info">
-          Quantity: ${product.quantity}
+          Quantity: ${productDetails.quantity}
         </div>
 
         <img class="product-image" src="${product.image}">
